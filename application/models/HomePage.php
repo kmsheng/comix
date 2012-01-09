@@ -13,6 +13,7 @@ class Application_Model_HomePage
             $this->setOptions($options);
         }
     }
+
     public function __set($name, $value)
     {
         $method = 'set' . $name;
@@ -22,6 +23,7 @@ class Application_Model_HomePage
 
         $this->$method($value);
     }
+
     public function __get($name)
     {
         $method = 'get' . $name;
@@ -32,6 +34,7 @@ class Application_Model_HomePage
 
         return $this->$method();
     }
+
     public function setOptions(array $options)
     {
 
@@ -51,9 +54,11 @@ class Application_Model_HomePage
 
         return $this;
     }
+
     public function setId($id)
     {
         $this->_id = (int) $id;
         return $this;
     }
+
 }
