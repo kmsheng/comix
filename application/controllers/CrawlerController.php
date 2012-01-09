@@ -160,6 +160,7 @@ class CrawlerController extends My_Controller_Action
             }
         }
     }
+
     /* @param filePath  Either local path or remote url is fine.
      * @param newWidth  The new width which the thumb is gonna be.
      *
@@ -187,6 +188,31 @@ class CrawlerController extends My_Controller_Action
         // Save resized image
         imagejpeg($thumb, $path, 100);
 
+    }
+    /* @param data  An object contains value, img src, description
+     *
+     * @return      True if successfully finish update.
+     */
+    public function updateHomePage($data)
+    {
+
+        foreach ($data as $datum) {
+            preg_match('/(\d+)\.html/', $datum->href, $matches);
+            $id = $matches[1];
+
+            $this->homePage->setId($id);
+            $this->homePage->setName($datum->value);
+            $this->homePage->setImgUrl($datum->img->src);
+            $this->homePage->setDescription($datum->description);
+
+            try {
+                $this->homePageMapper->save($this->homePage);
+            } catch (Zend_Exception $e) {
+                $this->showErrorMessage($e);
+            }
+        }
+
+        return true;
     }
     public function indexAction()
     {
