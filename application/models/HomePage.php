@@ -70,4 +70,8 @@ class Application_Model_HomePage
         $this->_name = (string) $name;
         return $this;
     }
+    public function getName()
+    {
+        return $this->_name;
+    }
 }
