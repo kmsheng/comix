@@ -103,6 +103,39 @@ class CrawlerController extends My_Controller_Action
 
         return false;
     }
+    /* @param link  An object contains member variables href and value.
+     * @param data  An array contains the image data; it could be empty for the first call.
+     *
+     * @return data An image data array.
+     */
+    public function getImages($link, $data)
+    {
+        $dom = $this->getDomQuery($link->href);
+
+        try {
+            $imgs = $dom->query('td > img');
+        } catch (Zend_Exception $e) {
+            echo "Caught exception: " . get_class($e) . "\n";
+            echo "Message: " . $e->getMessage() . "\n";
+        }
+
+        foreach ($imgs as $img) {
+            $obj = new stdClass;
+            $src = $this->getFullUrl($img->getAttribute('src'));
+
+            if (preg_match('/\.jpg/', $src)) {
+                $obj->img->src = $src;
+                $obj->href = '/index/chapter?url=' . $link->href;
+                $obj->value = $link->value;
+
+                $obj->description = trim($this->getDescription($link->href));
+
+                $data[] = $obj;
+            }
+        }
+
+        return $data;
+    }
     public function indexAction()
     {
     }
