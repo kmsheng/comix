@@ -291,5 +291,10 @@ class CrawlerController extends My_Controller_Action
             throw new Zend_Exception('The url provided is not comic intro page.');
         }
 
+        try {
+            $chapterLinks = $this->getChapterLinks($_GET['url']);
+        } catch (Zend_Exception $e) {
+            $this->showErrorMessage($e);
+        }
     }
 }
