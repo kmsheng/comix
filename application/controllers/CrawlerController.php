@@ -15,6 +15,7 @@ class CrawlerController extends My_Controller_Action
         $this->homePage = new Application_Model_HomePage();
         $this->homePageMapper = new Application_Model_HomePageMapper();
 
+        $this->_helper->layout->disableLayout();
     }
 
     public function indexAction()
