@@ -138,4 +138,25 @@ abstract class My_Controller_Action extends Zend_Controller_Action
 
         return 'http://img' . $sid . '.8comic.com/' . $did . '/' . $itemid . '/' . $num . '/' . $img . '.jpg';
     }
+    /* @param url   URL to be verified.
+     *
+     * @return      True if it's comic intro page.
+     */
+    public function isComicIntroPage($url)
+    {
+        $search = array('/', '.');
+        $replace = array('\/', '\.');
+        $domainRegexp = str_replace($search, $replace, $this->domain);
+
+        return preg_match("/" . $domainRegexp . "\/html\/\d+.html/i", $url);
+
+    }
+
+    /* @param e Zend Exception Instance.
+     */
+    public function showErrorMessage($e)
+    {
+        echo "Caught exception: " . get_class($e) . "\n";
+        echo "Message: " . $e->getMessage() . "\n";
+    }
 }
