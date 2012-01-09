@@ -22,4 +22,14 @@ class Application_Model_HomePage
 
         $this->$method($value);
     }
+    public function __get($name)
+    {
+        $method = 'get' . $name;
+
+        if (('mapper' == $name) || !method_exists($this, $method)) {
+            throw new Exception('Invalid user property');
+        }
+
+        return $this->$method();
+    }
 }
