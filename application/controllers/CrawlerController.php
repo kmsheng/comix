@@ -4,6 +4,7 @@ class CrawlerController extends My_Controller_Action
 {
     protected $homePage;
     protected $homePageMapper;
+    protected $uniqueLinks = array();
 
     public function init()
     {
@@ -65,6 +66,7 @@ class CrawlerController extends My_Controller_Action
 
         return $data;
     }
+
     /* @param url   URL that has the chpater links.
      *
      * @return      True if match the regular expression.
@@ -83,6 +85,21 @@ class CrawlerController extends My_Controller_Action
         if (preg_match($rule, $url)) {
             return true;
         }
+
+        return false;
+    }
+    /* @param url   URL to be verified.
+     *
+     * @return      True if the url has already run.
+     */
+    public function hasUrl($url)
+    {
+        if (in_array($url, $this->uniqueLinks)) {
+            return true;
+        }
+
+        // The array contains unique links.
+        $this->uniqueLinks[] = $url;
 
         return false;
     }
