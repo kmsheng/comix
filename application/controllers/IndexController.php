@@ -13,6 +13,8 @@ class IndexController extends My_Controller_Action
 
     public function indexAction()
     {
+        $this->view->headScript()
+            ->prependFile('/static/js/home-page.js');
     }
 
 }
