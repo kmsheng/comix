@@ -136,6 +136,30 @@ class CrawlerController extends My_Controller_Action
 
         return $data;
     }
+    /* @param url       URL to fetch the description of an comic.
+     * @param length    Desired length of description.
+     *
+     * @return          The description of an comic.
+     */
+    public function getDescription($url, $length = 100)
+    {
+
+        $dom = $this->getDomQuery($url);
+        $descriptions = $dom->query('td');
+
+        foreach ($descriptions as $description) {
+
+            // Here's where they put the description, it might be changed.
+            if ('f0f8ff' === $description->getAttribute('bgcolor')) {
+
+                $text = $description->nodeValue;
+                if (mb_strlen($text) > $length) {
+                    $text = mb_substr($text, 0, 100, 'UTF-8');
+                }
+                return $text;
+            }
+        }
+    }
     public function indexAction()
     {
     }
