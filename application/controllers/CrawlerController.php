@@ -296,6 +296,7 @@ class CrawlerController extends My_Controller_Action
         } catch (Zend_Exception $e) {
             $this->showErrorMessage($e);
         }
+
         $link = $chapterLinks[0];
 
         try {
@@ -303,6 +304,7 @@ class CrawlerController extends My_Controller_Action
         } catch (Zend_Exception $e) {
             $this->showErrorMessage($e);
         }
+
         $images = 1000;
         $count = count($chapterLinks);
         $limit = ($count > $images) ? $count - $images : 0;
@@ -325,5 +327,14 @@ class CrawlerController extends My_Controller_Action
             $data[] = $obj;
             $index++;
         }
+
+
+
+
+
+
+
+
     }
+
 }
