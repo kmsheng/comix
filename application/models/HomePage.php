@@ -88,4 +88,8 @@ class Application_Model_HomePage
         $this->_img_url = (string) $img_url;
         return $this;
     }
+    public function getImgUrl()
+    {
+        return $this->_img_url;
+    }
 }
