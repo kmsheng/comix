@@ -74,4 +74,9 @@ class Application_Model_HomePage
     {
         return $this->_name;
     }
+    public function setDescription($description)
+    {
+        $this->_description = (string) $description;
+        return $this;
+    }
 }
