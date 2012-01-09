@@ -303,5 +303,27 @@ class CrawlerController extends My_Controller_Action
         } catch (Zend_Exception $e) {
             $this->showErrorMessage($e);
         }
+        $images = 1000;
+        $count = count($chapterLinks);
+        $limit = ($count > $images) ? $count - $images : 0;
+
+        $index = 0;
+        foreach($chapterLinks as $chapterLink) {
+
+            $obj = new stdClass;
+            preg_match('/\/(\w+\.jpg)/', $pages[$index], $matches);
+
+            $filename = $matches[1];
+            $path = dirname(__FILE__) . '/../../public/static/img/chapter-thumbs/' . $filename;
+
+            // if thumb exists, use it. Otherwise, download remote large picture instead.
+            $obj->src = file_exists($path) ? '/static/img/chapter-thumbs/' . $filename : $pages[$index];
+            $obj->href = $chapterLink->url;
+            $obj->value = $chapterLink->value;
+            $obj->flag = ($index >= $limit) ? true : false;
+
+            $data[] = $obj;
+            $index++;
+        }
     }
 }
