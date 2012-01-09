@@ -13,4 +13,13 @@ class Application_Model_HomePage
             $this->setOptions($options);
         }
     }
+    public function __set($name, $value)
+    {
+        $method = 'set' . $name;
+        if (('mapper' == $name) || !method_exists($this, $method)) {
+            throw new Exception('Invalid user property');
+        }
+
+        $this->$method($value);
+    }
 }
