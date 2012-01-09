@@ -330,7 +330,9 @@ class CrawlerController extends My_Controller_Action
 
         $data = array_reverse($data);
 
+        $this->view->output = Zend_Json::encode($data);
 
+        header('Content-type: application/json');
 
 
 
