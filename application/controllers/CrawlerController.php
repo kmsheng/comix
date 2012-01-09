@@ -35,6 +35,36 @@ class CrawlerController extends My_Controller_Action
 
         return $url;
     }
+
+    /* @param url   URL to parse links.
+     * @param data  An array that contains the link data, could be empty.
+     *
+     * @return      An array that contains link data.
+     */
+    public function getLinks($url, $data)
+    {
+        $dom = $this->getDomQuery($url);
+
+        $a = $dom->query('a');
+        $href = '';
+
+        foreach($a as $link) {
+            $obj = new stdClass;
+            $href = $this->getFullUrl($link->getAttribute('href'));
+
+            if ($this->hasChapterLinks($href) && !$this->hasUrl($href)) {
+
+                $obj->href = $href;
+                $obj->value = trim($link->nodeValue);
+
+                if (!empty($obj->value)) {
+                    $data[] = $obj;
+                }
+            }
+        }
+
+        return $data;
+    }
     public function indexAction()
     {
     }
