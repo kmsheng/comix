@@ -11,6 +11,12 @@ class IndexController extends My_Controller_Action
             ->prependFile('/static/js/pins.js');
     }
 
+    public function chapterAction()
+    {
+        $this->view->headScript()
+            ->prependFile('/static/js/chapter.js');
+    }
+
     public function indexAction()
     {
         $this->view->headScript()
