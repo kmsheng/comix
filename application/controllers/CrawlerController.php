@@ -218,4 +218,36 @@ class CrawlerController extends My_Controller_Action
     {
     }
 
+    public function makeChapterThumbsAction()
+    {
+
+        foreach ($this->homePageMapper->fetchAll() as $datum) {
+
+            $id = $datum->getId();
+            $url = $this->domain . '/html/' . $id . '.html';
+
+            try {
+                $chapterLinks = $this->getChapterLinks($url);
+            } catch (Zend_Exception $e) {
+                $this->showErrorMessage($e);
+            }
+
+            $link = $chapterLinks[0];
+
+            try {
+                $pages = $this->fetchFirstPages($link->url);
+            } catch (Zend_Exception $e) {
+                $this->showErrorMessage($e);
+            }
+
+            $count = count($chapterLinks);
+            $data = array();
+
+            foreach($pages as $page) {
+                $this->resizeImage($page, 192);
+            }
+        }
+
+        $this->view->output = 'done fetching chapter thumbs';
+    }
 }
