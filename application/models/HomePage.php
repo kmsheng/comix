@@ -65,4 +65,9 @@ class Application_Model_HomePage
     {
         return $this->_id;
     }
+    public function setName($name)
+    {
+        $this->_name = (string) $name;
+        return $this;
+    }
 }
