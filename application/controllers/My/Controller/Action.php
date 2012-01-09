@@ -111,4 +111,31 @@ abstract class My_Controller_Action extends Zend_Controller_Action
         return $data;
     }
 
+    /* @param datum     An object contains num, sid, did, page, code as member variables.
+     *
+     * @return          The absolute URL of comic image.
+     */
+    private function getImageUrl($datum, $itemid, $p = 1)
+    {
+        $num = $datum->num;
+        $sid = $datum->sid;
+        $did = $datum->did;
+        $page = $datum->page;
+        $code = $datum->code;
+
+        // Here's how the China website encrypts their URLs of comic image.
+        if ($p < 10) {
+            $img = '00' . $p;
+        } else if ($p < 100) {
+            $img = '0' . $p;
+        } else {
+            $img = $p;
+        }
+
+        $m = (int) (((($p - 1) / 10) % 10) + ((($p - 1) % 10) * 3));
+
+        $img .= '_' . substr($code, $m, 3);
+
+        return 'http://img' . $sid . '.8comic.com/' . $did . '/' . $itemid . '/' . $num . '/' . $img . '.jpg';
+    }
 }
