@@ -51,4 +51,9 @@ class Application_Model_HomePage
 
         return $this;
     }
+    public function setId($id)
+    {
+        $this->_id = (int) $id;
+        return $this;
+    }
 }
