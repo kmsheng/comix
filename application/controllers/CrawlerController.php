@@ -18,6 +18,23 @@ class CrawlerController extends My_Controller_Action
         $this->_helper->layout->disableLayout();
     }
 
+    /* @param url   Incomplete url that does not include domain name.
+     *              e.g. /msg, member/reg.aspx
+     *
+     * @return      The full URL, e.g. http://www.8comic.com/member/reg.aspx
+     */
+    public function getFullUrl($url)
+    {
+
+        if (!preg_match('/http:\/\//i', $url)) {
+            if ($url{0} != '/') {
+                $url = '/' . $url;
+            }
+            $url = $this->domain . $url;
+        }
+
+        return $url;
+    }
     public function indexAction()
     {
     }
