@@ -1,0 +1,8 @@
+INSTALL.txt
+LICENSE.txt
+README.txt
+demos/
+extras/documentation
+.htaccess
+application/configs/application.ini
+/public/static/img/chapter-thumbs/
