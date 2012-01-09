@@ -296,5 +296,12 @@ class CrawlerController extends My_Controller_Action
         } catch (Zend_Exception $e) {
             $this->showErrorMessage($e);
         }
+        $link = $chapterLinks[0];
+
+        try {
+            $pages = $this->fetchFirstPages($link->url);
+        } catch (Zend_Exception $e) {
+            $this->showErrorMessage($e);
+        }
     }
 }
