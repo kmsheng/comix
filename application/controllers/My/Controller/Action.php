@@ -70,4 +70,42 @@ abstract class My_Controller_Action extends Zend_Controller_Action
 
         return $firstPages;
     }
+    /* @param url   URL of any page that display the comic.
+     *
+     * @return      An array contains several objects that have
+     *              num, sid, did, page, code as the member variables of object.
+     */
+    public function getPageData($url)
+    {
+        $data = array();
+        $dom = $this->getDomQuery($url);
+        $scripts = $dom->query('script');
+
+        foreach ($scripts as $script) {
+
+            preg_match('/var codes=\"([\w\s|]+)\"/', $script->nodeValue, $matches);
+
+            if (!empty($matches)) {
+                break;
+            }
+        }
+
+        $matches = explode('|', $matches[1]);
+
+        foreach ($matches as $match) {
+
+            $pieces = preg_split("/\s+/", $match);
+            $obj = new stdClass;
+
+            $obj->num = $pieces[0];
+            $obj->sid = $pieces[1];
+            $obj->did = $pieces[2];
+            $obj->page = $pieces[3];
+            $obj->code = $pieces[4];
+
+            $data[] = $obj;
+        }
+
+        return $data;
+    }
 }
