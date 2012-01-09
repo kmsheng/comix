@@ -333,11 +333,26 @@ class CrawlerController extends My_Controller_Action
         $this->view->output = Zend_Json::encode($data);
 
         header('Content-type: application/json');
+    }
 
+    /* parse the links and image urls of home page
+     * and store them in the database.
+     */
+    public function updateHomePageAction()
+    {
 
+        $links = array();
+        $data = array();
 
+        $links = $this->getLinks($this->domain, $links);
 
+        foreach($links as $link) {
+            $data = $this->getImages($link, $data);
+        }
 
+        if ($this->updateHomePage($data)) {
+            $this->view->output = '更新完成!';
+        }
     }
 
 }
