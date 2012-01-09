@@ -51,4 +51,23 @@ abstract class My_Controller_Action extends Zend_Controller_Action
 
         return $chapterLinks;
     }
+    /* @param url   URL to the comic page of certain chapter and has JavaScript contains var codes="".
+     *
+     * @return      An array contains the url to the first page of each chapter.
+     */
+    public function fetchFirstPages($url)
+    {
+        $firstPages = array();
+        $data = $this->getPageData($url);
+
+        foreach ($data as $datum) {
+
+            preg_match('/(\d+).html/', $url, $urlMatches);
+            $itemid = $urlMatches[1];
+
+            $firstPages[] = $this->getImageUrl($datum, $itemid);
+        }
+
+        return $firstPages;
+    }
 }
