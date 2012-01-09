@@ -88,6 +88,7 @@ class CrawlerController extends My_Controller_Action
 
         return false;
     }
+
     /* @param url   URL to be verified.
      *
      * @return      True if the url has already run.
@@ -103,6 +104,7 @@ class CrawlerController extends My_Controller_Action
 
         return false;
     }
+
     /* @param link  An object contains member variables href and value.
      * @param data  An array contains the image data; it could be empty for the first call.
      *
@@ -136,6 +138,7 @@ class CrawlerController extends My_Controller_Action
 
         return $data;
     }
+
     /* @param url       URL to fetch the description of an comic.
      * @param length    Desired length of description.
      *
@@ -189,6 +192,7 @@ class CrawlerController extends My_Controller_Action
         imagejpeg($thumb, $path, 100);
 
     }
+
     /* @param data  An object contains value, img src, description
      *
      * @return      True if successfully finish update.
@@ -214,6 +218,7 @@ class CrawlerController extends My_Controller_Action
 
         return true;
     }
+
     public function indexAction()
     {
     }
@@ -250,6 +255,7 @@ class CrawlerController extends My_Controller_Action
 
         $this->view->output = 'done fetching chapter thumbs';
     }
+
     /* Provide the home page data in json format.
      */
     public function provideHomePageDataAction()
@@ -271,4 +277,5 @@ class CrawlerController extends My_Controller_Action
 
         header('Content-type: application/json');
     }
+
 }
