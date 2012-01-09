@@ -83,4 +83,9 @@ class Application_Model_HomePage
     {
         return $this->_description;
     }
+    public function setImgUrl($img_url)
+    {
+        $this->_img_url = (string) $img_url;
+        return $this;
+    }
 }
