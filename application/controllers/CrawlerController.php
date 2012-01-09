@@ -160,6 +160,34 @@ class CrawlerController extends My_Controller_Action
             }
         }
     }
+    /* @param filePath  Either local path or remote url is fine.
+     * @param newWidth  The new width which the thumb is gonna be.
+     *
+     * */
+    public function resizeImage($filePath, $newWidth)
+    {
+
+        // Get new sizes
+        list($width, $height) = getimagesize($filePath);
+
+        $newHeight = ($height * $newWidth) / $width;
+
+        // Load
+        $thumb = imagecreatetruecolor($newWidth, $newHeight);
+        $source = imagecreatefromjpeg($filePath);
+
+        // Resize
+        imagecopyresized($thumb, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+
+        preg_match('/\/([\w\_]+\.jpg)/', $filePath, $matches);
+
+        $filename = $matches[1];
+        $path = dirname(__FILE__) . '/../../public/static/img/chapter-thumbs/' . $filename;
+
+        // Save resized image
+        imagejpeg($thumb, $path, 100);
+
+    }
     public function indexAction()
     {
     }
