@@ -7,6 +7,8 @@ class CrawlerController extends My_Controller_Action
 
     public function init()
     {
+        parent::init();
+
 
         $this->homePage = new Application_Model_HomePage();
         $this->homePageMapper = new Application_Model_HomePageMapper();
