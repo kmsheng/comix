@@ -138,6 +138,7 @@ abstract class My_Controller_Action extends Zend_Controller_Action
 
         return 'http://img' . $sid . '.8comic.com/' . $did . '/' . $itemid . '/' . $num . '/' . $img . '.jpg';
     }
+
     /* @param url   URL to be verified.
      *
      * @return      True if it's comic intro page.
@@ -159,4 +160,5 @@ abstract class My_Controller_Action extends Zend_Controller_Action
         echo "Caught exception: " . get_class($e) . "\n";
         echo "Message: " . $e->getMessage() . "\n";
     }
+
 }
