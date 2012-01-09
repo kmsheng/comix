@@ -328,6 +328,7 @@ class CrawlerController extends My_Controller_Action
             $index++;
         }
 
+        $data = array_reverse($data);
 
 
 
