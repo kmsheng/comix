@@ -250,4 +250,25 @@ class CrawlerController extends My_Controller_Action
 
         $this->view->output = 'done fetching chapter thumbs';
     }
+    /* Provide the home page data in json format.
+     */
+    public function provideHomePageDataAction()
+    {
+
+        $output = array();
+
+        foreach ($this->homePageMapper->fetchAll() as $datum) {
+            $array = array();
+            $array['href'] = '/index/chapter?url=' . $this->domain .'/html/' . $datum->getId() . '.html';
+            $array['name'] = $datum->getName();
+            $array['description'] = $datum->getDescription();
+            $array['src'] = $datum->getImgUrl();
+
+            $output[] = $array;
+        }
+
+        $this->view->output = Zend_Json::encode($output);
+
+        header('Content-type: application/json');
+    }
 }
