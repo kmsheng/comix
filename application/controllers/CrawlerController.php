@@ -278,4 +278,18 @@ class CrawlerController extends My_Controller_Action
         header('Content-type: application/json');
     }
 
+    public function provideChapterDataAction()
+    {
+
+        $data = array();
+
+        if (!isset($_GET['url'])) {
+            throw new Zend_Exception('Please input url to parse for chapter links');
+        }
+
+        if (!$this->isComicIntroPage($_GET['url'])) {
+            throw new Zend_Exception('The url provided is not comic intro page.');
+        }
+
+    }
 }
