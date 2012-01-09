@@ -65,31 +65,38 @@ class Application_Model_HomePage
     {
         return $this->_id;
     }
+
     public function setName($name)
     {
         $this->_name = (string) $name;
         return $this;
     }
+
     public function getName()
     {
         return $this->_name;
     }
+
     public function setDescription($description)
     {
         $this->_description = (string) $description;
         return $this;
     }
+
     public  function getDescription()
     {
         return $this->_description;
     }
+
     public function setImgUrl($img_url)
     {
         $this->_img_url = (string) $img_url;
         return $this;
     }
+
     public function getImgUrl()
     {
         return $this->_img_url;
     }
+
 }
