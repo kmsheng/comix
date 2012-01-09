@@ -32,4 +32,23 @@ class Application_Model_HomePage
 
         return $this->$method();
     }
+    public function setOptions(array $options)
+    {
+
+        $methods = get_class_methods($this);
+        foreach ($options as $key => $value) {
+            // handle for the variable like this_thingy
+            $key_array = explode('_', $key);
+            $part_string = '';
+            foreach ($key_array as $part) {
+                $part_string .= ucfirst($part);
+            }
+            $method = 'set' . $part_string;
+            if (in_array($method, $methods)) {
+                $this->$method($value);
+            }
+        }
+
+        return $this;
+    }
 }
