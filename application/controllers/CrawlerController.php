@@ -65,6 +65,27 @@ class CrawlerController extends My_Controller_Action
 
         return $data;
     }
+    /* @param url   URL that has the chpater links.
+     *
+     * @return      True if match the regular expression.
+     */
+    public function hasChapterLinks($url) {
+        $rule = '';
+
+        switch ($this->domain) {
+            case 'http://www.8comic.com':
+                $rule = '/\/html/';
+                break;
+            default:
+                $rule = '//';
+        }
+
+        if (preg_match($rule, $url)) {
+            return true;
+        }
+
+        return false;
+    }
     public function indexAction()
     {
     }
