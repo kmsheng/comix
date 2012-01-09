@@ -7,4 +7,10 @@ class Application_Model_HomePage
     protected $_description;
     protected $_img_url;
 
+    public function __construct(array $options = null)
+    {
+        if (is_array($options)) {
+            $this->setOptions($options);
+        }
+    }
 }
