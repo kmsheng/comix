@@ -61,4 +61,8 @@ class Application_Model_HomePage
         return $this;
     }
 
+    public function  getId()
+    {
+        return $this->_id;
+    }
 }
