@@ -51,6 +51,7 @@ abstract class My_Controller_Action extends Zend_Controller_Action
 
         return $chapterLinks;
     }
+
     /* @param url   URL to the comic page of certain chapter and has JavaScript contains var codes="".
      *
      * @return      An array contains the url to the first page of each chapter.
@@ -70,6 +71,7 @@ abstract class My_Controller_Action extends Zend_Controller_Action
 
         return $firstPages;
     }
+
     /* @param url   URL of any page that display the comic.
      *
      * @return      An array contains several objects that have
@@ -108,4 +110,5 @@ abstract class My_Controller_Action extends Zend_Controller_Action
 
         return $data;
     }
+
 }
