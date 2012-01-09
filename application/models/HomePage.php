@@ -79,4 +79,8 @@ class Application_Model_HomePage
         $this->_description = (string) $description;
         return $this;
     }
+    public  function getDescription()
+    {
+        return $this->_description;
+    }
 }
