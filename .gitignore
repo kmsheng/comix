@@ -6,3 +6,4 @@ extras/documentation
 .htaccess
 application/configs/application.ini
 /public/static/img/
+/public/static/js/*.min.js
