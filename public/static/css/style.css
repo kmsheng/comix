@@ -364,7 +364,51 @@ header, footer, aside, nav, article {
     display: block;
 }
 
+/* Primary styles: David */
+.pin {
+    max-width: 192px;
+    padding: 15px 15px 0;
+    height: auto;
+}
 
+.pin-box {
+    margin: 3px 0 3px 14px;
+    background-color: #FFFFFF;
+    box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
+    width: 222px;
+    position: absolute;
+    letter-spacing: 1px;
+}
+
+.name {
+    line-height: 30px;
+    padding: 0 15px;
+}
+
+.description {
+    padding: 10px 15px;
+    line-height: 20px;
+    color: #524D4D;
+    font-size: 12px;
+}
+
+.description, #container {
+    background-color: #f3f1f2;
+}
+
+#container {
+    display: block;
+    position: relative;
+}
+
+.name a {
+    text-decoration: none;
+    color: #606060;
+}
+
+.name a:hover {
+    color: #000;
+}
 /* non-semantic helper classes */
 
 /* For image replacement */
