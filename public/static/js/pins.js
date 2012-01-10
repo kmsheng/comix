@@ -8,7 +8,7 @@ $(function() {
 	}
 	});
 
-	setInterval('setPins();', 3000);
+	setInterval('setPins();', 1000);
 
 	$(window).resize(function() {
 		setPins();
