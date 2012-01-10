@@ -15,4 +15,11 @@ class Application_Model_HomePageMapper
         $this->_dbTable = $dbTable;
         return $this;
     }
+    public function getDbTable()
+    {
+        if (null === $this->_dbTable) {
+            $this->setDbTable('Application_Model_DbTable_HomePage');
+        }
+        return $this->_dbTable;
+    }
 }
