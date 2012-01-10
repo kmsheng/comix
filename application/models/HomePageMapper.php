@@ -40,4 +40,19 @@ class Application_Model_HomePageMapper
         }
 
     }
+    public function find($id, Application_Model_HomePage $home_page)
+    {
+        $result = $this->getDbTable()->find($id);
+        if (0 == count($result)) {
+            return false;
+        }
+
+        $row = $result->current();
+        $home_page->setId($row->id)
+            ->setName($row->name)
+            ->setDescription($row->description)
+            ->setImgUrl($row->img_url);
+
+        return $home_page;
+    }
 }
