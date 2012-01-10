@@ -5,4 +5,4 @@ demos/
 extras/documentation
 .htaccess
 application/configs/application.ini
-/public/static/img/chapter-thumbs/
+/public/static/img/
