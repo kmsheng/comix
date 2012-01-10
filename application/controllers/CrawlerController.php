@@ -52,15 +52,18 @@ class CrawlerController extends My_Controller_Action
         foreach ($a as $link) {
             $obj = new stdClass;
             $href = $this->getFullUrl($link->getAttribute('href'));
+            $value = trim($link->nodeValue);
+
+            if (empty($value)) {
+                continue;
+            }
 
             if ($this->hasChapterLinks($href) && !$this->hasUrl($href)) {
 
                 $obj->href = $href;
-                $obj->value = trim($link->nodeValue);
+                $obj->value = $value;
 
-                if (!empty($obj->value)) {
-                    $data[] = $obj;
-                }
+                $data[] = $obj;
             }
         }
 
