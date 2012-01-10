@@ -49,7 +49,7 @@ class CrawlerController extends My_Controller_Action
         $a = $dom->query('a');
         $href = '';
 
-        foreach($a as $link) {
+        foreach ($a as $link) {
             $obj = new stdClass;
             $href = $this->getFullUrl($link->getAttribute('href'));
 
