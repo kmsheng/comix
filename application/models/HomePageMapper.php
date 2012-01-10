@@ -15,6 +15,7 @@ class Application_Model_HomePageMapper
         $this->_dbTable = $dbTable;
         return $this;
     }
+
     public function getDbTable()
     {
         if (null === $this->_dbTable) {
@@ -22,6 +23,7 @@ class Application_Model_HomePageMapper
         }
         return $this->_dbTable;
     }
+
     public function save(Application_Model_HomePage $home_page)
     {
         $data = array(
@@ -40,6 +42,7 @@ class Application_Model_HomePageMapper
         }
 
     }
+
     public function find($id, Application_Model_HomePage $home_page)
     {
         $result = $this->getDbTable()->find($id);
@@ -55,6 +58,7 @@ class Application_Model_HomePageMapper
 
         return $home_page;
     }
+
     public function fetchAll()
     {
         $resultSet = $this->getDbTable()->fetchAll();
@@ -70,4 +74,5 @@ class Application_Model_HomePageMapper
         }
         return $entries;
     }
+
 }
