@@ -55,4 +55,19 @@ class Application_Model_HomePageMapper
 
         return $home_page;
     }
+    public function fetchAll()
+    {
+        $resultSet = $this->getDbTable()->fetchAll();
+        $entries   = array();
+        foreach ($resultSet as $row) {
+            $entry = new Application_Model_HomePage();
+            $entry->setId($row->id)
+                ->setName($row->name)
+                ->setDescription($row->description)
+                ->setImgUrl($row->img_url);
+
+            $entries[] = $entry;
+        }
+        return $entries;
+    }
 }
