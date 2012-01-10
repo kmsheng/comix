@@ -22,4 +22,22 @@ class Application_Model_HomePageMapper
         }
         return $this->_dbTable;
     }
+    public function save(Application_Model_HomePage $home_page)
+    {
+        $data = array(
+            'id' => $home_page->getId(),
+            'name'   => $home_page->getName(),
+            'description' => $home_page->getDescription(),
+            'img_url' => $home_page->getImgUrl(),
+        );
+
+        // 沒資料就新增
+        try {
+            $this->getDbTable()->insert($data);
+        } catch (Zend_Exception $e) {
+            // 如果資料已存在 db, 更新資料
+            $this->getDbTable()->update($data, array('id = ?' => $home_page->getId()));
+        }
+
+    }
 }
