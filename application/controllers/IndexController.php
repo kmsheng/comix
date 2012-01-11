@@ -16,9 +16,11 @@ class IndexController extends My_Controller_Action
             ->prependFile('/static/js/home-page.js');
     }
 
+    // choose which chapter to watch
     public function chapterAction()
     {
         $this->view->headScript()
+            ->prependFile('/static/js/pins.js')
             ->prependFile('/static/js/chapter.js');
     }
 
