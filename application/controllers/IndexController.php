@@ -6,7 +6,10 @@ class IndexController extends My_Controller_Action
     public function init()
     {
         parent::init();
+    }
 
+    public function indexAction()
+    {
         $this->view->headScript()
             ->prependFile('/static/js/pins.js');
     }
@@ -17,7 +20,6 @@ class IndexController extends My_Controller_Action
             ->prependFile('/static/js/chapter.js');
     }
 
-    public function indexAction()
     {
         $this->view->headScript()
             ->prependFile('/static/js/home-page.js');
