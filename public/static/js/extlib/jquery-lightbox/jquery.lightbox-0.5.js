@@ -169,6 +169,7 @@
 					width:		arrPageSizes[0],
 					height:		arrPageSizes[1]
 				});
+
 				// Get page scroll
 				var arrPageScroll = ___getPageScroll();
 				// Calculate top and left offset for the jquery-lightbox div object and show it
@@ -177,6 +178,7 @@
 					top: 0,
 					left:	arrPageScroll[0]
 				});
+
 			});
 		}
 
@@ -239,6 +241,7 @@
 					___pause(100);
 				}
 			}
+
 			$('#lightbox-container-image-data-box').css({ width: intImageWidth });
 			$('#lightbox-nav-btnPrev,#lightbox-nav-btnNext').css({ height: intImageHeight + (settings.containerBorderSize * 2) });
 		};
