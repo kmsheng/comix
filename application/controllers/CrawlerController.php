@@ -358,4 +358,33 @@ class CrawlerController extends My_Controller_Action
         }
     }
 
+    /* Provides comic pages data.
+     */
+    public function provideComicAction()
+    {
+        $images = array();
+
+        if (!isset($_GET['url'])) {
+            throw new Zend_Exception('please input the number of chapter!');
+        }
+
+        $url = $_GET['url'];
+
+        $itemid = $this->getItemId($url);
+        $data = $this->getPageData($url);
+
+        $chapter = $this->getChapterByUrl($url);
+        $chapterData = $this->findChapterData($data, $chapter);
+
+        for ($index = 1; $index <= $chapterData->page; $index++) {
+
+            $images[$index] = $this->getImageUrl($chapterData, $itemid, $index);
+        }
+
+        $output = Zend_Json::encode($images);
+        $this->view->output = $output;
+
+        header('Content-type: application/json');
+
+    }
 }
