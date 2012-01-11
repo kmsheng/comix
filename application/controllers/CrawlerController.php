@@ -387,4 +387,16 @@ class CrawlerController extends My_Controller_Action
         header('Content-type: application/json');
 
     }
+    public function findChapterData($data, $chapter)
+    {
+
+        foreach ($data as $datum) {
+
+            if ((int) $chapter === (int) $datum->num) {
+                return $datum;
+            }
+        }
+
+        return null;
+    }
 }
