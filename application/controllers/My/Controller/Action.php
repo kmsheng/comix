@@ -119,7 +119,7 @@ abstract class My_Controller_Action extends Zend_Controller_Action
      *
      * @return          The absolute URL of comic image.
      */
-    private function getImageUrl($datum, $itemid, $p = 1)
+    public function getImageUrl($datum, $itemid, $p = 1)
     {
         $num = $datum->num;
         $sid = $datum->sid;
