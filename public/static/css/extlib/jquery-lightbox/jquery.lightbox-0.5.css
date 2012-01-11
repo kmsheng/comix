@@ -101,6 +101,9 @@
 }
 
 /* jQuery lightBox plugin - Gallery style */
+#gallery {
+	margin-top: 25px;
+}
 #gallery a {
 	font-size: 16px;
 	margin: 10px 10px;
