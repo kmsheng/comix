@@ -406,5 +406,18 @@ class CrawlerController extends My_Controller_Action
         return null;
     }
 
+    /* @param url   URL to get chapter.
+     *
+     * @return      Chapter if it matches the regular expression.
+     */
+    public function getChapterByUrl($url)
+    {
+        preg_match('/ch=(\d+)$/', $url, $matches);
+
+        if (isset($matches[1])) {
+            return $matches[1];
+        }
+        return null;
+    }
 
 }
