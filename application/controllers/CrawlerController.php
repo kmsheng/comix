@@ -338,7 +338,7 @@ class CrawlerController extends My_Controller_Action
         header('Content-type: application/json');
     }
 
-    /* parse the links and image urls of home page
+    /* Parse the links and image urls of home page
      * and store them in the database.
      */
     public function updateHomePageAction()
