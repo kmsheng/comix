@@ -1,3 +1,16 @@
+$(function() {
+    var comicUrl = document.location.search;
+    var url = 'http://comix.kmsheng.com/crawler/provide-comic' + comicUrl;
+
+    $.ajax({
+        url: url,
+        success: function(data) {
+            makePages(data);
+            $('#gallery a').lightBox();
+        }
+    });
+});
+
 var makePages = function(data) {
     var gallery = $('#gallery');
     var ul = $('<ul>');
