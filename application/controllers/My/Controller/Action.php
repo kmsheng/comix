@@ -59,6 +59,7 @@ abstract class My_Controller_Action extends Zend_Controller_Action
     public function fetchFirstPages($url)
     {
         $firstPages = array();
+
         $data = $this->getPageData($url);
         $itemid = $this->getItemId($url);
 
@@ -121,6 +122,7 @@ abstract class My_Controller_Action extends Zend_Controller_Action
      */
     public function getImageUrl($datum, $itemid, $p = 1)
     {
+
         $num = $datum->num;
         $sid = $datum->sid;
         $did = $datum->did;
