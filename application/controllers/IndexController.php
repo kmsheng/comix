@@ -8,10 +8,12 @@ class IndexController extends My_Controller_Action
         parent::init();
     }
 
+    // main page which has many comics shown.
     public function indexAction()
     {
         $this->view->headScript()
-            ->prependFile('/static/js/pins.js');
+            ->prependFile('/static/js/pins.js')
+            ->prependFile('/static/js/home-page.js');
     }
 
     public function chapterAction()
