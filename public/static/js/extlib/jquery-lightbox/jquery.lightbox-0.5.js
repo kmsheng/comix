@@ -145,7 +145,7 @@
 			// Calculate top and left offset for the jquery-lightbox div object and show it
 			$('#jquery-lightbox').css({
 				//top:	arrPageScroll[1] + (arrPageSizes[3] / 10),
-				top: 0,
+				top:	0,
 				left:	arrPageScroll[0]
 			}).show();
 
@@ -200,7 +200,7 @@
 			var objImagePreloader = new Image();
 			objImagePreloader.onload = function() {
 
-				$('#lightbox-image').attr('src',settings.imageArray[settings.activeImage][0]);
+				$('#lightbox-image').attr('src', settings.imageArray[settings.activeImage][0]);
 
 				// Perfomance an effect in the image container resizing it
 				_resize_container_image_box(objImagePreloader.width, objImagePreloader.height);
