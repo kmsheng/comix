@@ -60,16 +60,20 @@ abstract class My_Controller_Action extends Zend_Controller_Action
     {
         $firstPages = array();
         $data = $this->getPageData($url);
+        $itemid = $this->getItemId($url);
 
         foreach ($data as $datum) {
-
-            preg_match('/(\d+).html/', $url, $urlMatches);
-            $itemid = $urlMatches[1];
 
             $firstPages[] = $this->getImageUrl($datum, $itemid);
         }
 
         return $firstPages;
+    }
+
+    public function getItemId($url)
+    {
+        preg_match('/(\d+).html/', $url, $urlMatches);
+        return $urlMatches[1];
     }
 
     /* @param url   URL of any page that display the comic.
