@@ -3,12 +3,14 @@
 class IndexController extends My_Controller_Action
 {
     protected $homePageMapper;
+    protected $title;
 
     public function init()
     {
         parent::init();
 
         $this->homePageMapper = new Application_Model_HomePageMapper();
+        $this->title = 'comix - 輕鬆讀';
     }
 
     // main page which has many comics shown.
@@ -17,6 +19,8 @@ class IndexController extends My_Controller_Action
         $this->view->headScript()
             ->prependFile('/static/js/pins.js')
             ->prependFile('/static/js/home-page.js');
+
+        $this->view->title = $this->title;
     }
 
     // choose which chapter to watch
@@ -32,6 +36,8 @@ class IndexController extends My_Controller_Action
 
         $id = $this->getItemId($_GET['url']);
         $name = $this->homePageMapper->getNameById($id);
+
+        $this->view->title = $this->title . ' - ' .  $name;
     }
 
     // browse comic
@@ -54,6 +60,8 @@ class IndexController extends My_Controller_Action
 
         $id = $this->getItemId($_GET['url']);
         $name = $this->homePageMapper->getNameById($id);
+
+        $this->view->title = $this->title . ' - ' . $name . ' - ' . htmlspecialchars($_GET['text']);
     }
 
 }
