@@ -19,7 +19,9 @@ class CrawlerController extends My_Controller_Action
         $this->_helper->layout->disableLayout();
     }
 
-    /* @param url   Incomplete url that does not include domain name.
+    /* Retrieve an absolute URL.
+     *
+     * @param url   Incomplete url that does not include domain name.
      *              e.g. /msg, member/reg.aspx
      *
      * @return      The full URL, e.g. http://www.8comic.com/member/reg.aspx
@@ -37,7 +39,9 @@ class CrawlerController extends My_Controller_Action
         return $url;
     }
 
-    /* @param url   URL to parse links.
+    /* Retrieve an array contains link objects, each of them has href and value as member variables.
+     *
+     * @param url   URL to parse links.
      * @param data  An array that contains the link data, could be empty.
      *
      * @return      An array that contains link data.
@@ -70,9 +74,11 @@ class CrawlerController extends My_Controller_Action
         return $data;
     }
 
-    /* @param url   URL that has the chpater links.
+    /* To determine whether a URL has chapter links.
      *
-     * @return      True if match the regular expression.
+     * @param url   URL that has the chpater links.
+     *
+     * @return      True if the URL matches the regular expression.
      */
     public function hasChapterLinks($url) {
         $rule = '';
@@ -92,9 +98,11 @@ class CrawlerController extends My_Controller_Action
         return false;
     }
 
-    /* @param url   URL to be verified.
+    /* To check whether a URL has already been run.
      *
-     * @return      True if the url has already run.
+     * @param url   URL to be verified.
+     *
+     * @return      True if the url has already been run.
      */
     public function hasUrl($url)
     {
@@ -108,7 +116,9 @@ class CrawlerController extends My_Controller_Action
         return false;
     }
 
-    /* @param link  An object contains member variables href and value.
+    /* To retrieve image data such as image source, hypertext reference, text value, and description of images.
+     *
+     * @param link  An object contains member variables href and value.
      * @param data  An array contains the image data; it could be empty for the first call.
      *
      * @return data An image data array.
@@ -142,8 +152,10 @@ class CrawlerController extends My_Controller_Action
         return $data;
     }
 
-    /* @param url       URL to fetch the description of an comic.
-     * @param length    Desired length of description.
+    /* Fetch description of a comic from provided URL.
+     *
+     * @param url       URL to fetch the description of an comic.
+     * @param length    Desired length of description. Default to be 100.
      *
      * @return          The description of an comic.
      */
@@ -167,7 +179,9 @@ class CrawlerController extends My_Controller_Action
         }
     }
 
-    /* @param filePath  Either local path or remote url is fine.
+    /* To resize an image and save it to specific folder.
+     *
+     * @param filePath  Either local path or remote url is fine.
      * @param newWidth  The new width which the thumb is gonna be.
      *
      * */
@@ -196,7 +210,9 @@ class CrawlerController extends My_Controller_Action
 
     }
 
-    /* @param data  An object contains value, img src, description
+    /* Update the data of home page such as links, names of comics, descriptions.
+     *
+     * @param data  An object contains value, img src, description
      *
      * @return      True if successfully finish update.
      */
@@ -226,6 +242,8 @@ class CrawlerController extends My_Controller_Action
     {
     }
 
+    /* Making the chapter thumbs based on the data of home page by running this action.
+     */
     public function makeChapterThumbsAction()
     {
 
@@ -281,6 +299,8 @@ class CrawlerController extends My_Controller_Action
         header('Content-type: application/json');
     }
 
+    /* Display the json data of a chapter by running this action.
+     */
     public function provideChapterDataAction()
     {
 
@@ -388,7 +408,9 @@ class CrawlerController extends My_Controller_Action
 
     }
 
-    /* @param data      Object contains member variables such as num, sid, did, page, code.
+    /* To find a datum of chapter by the provided chapter.
+     *
+     * @param data      Object contains member variables such as num, sid, did, page, code.
      * @param chapter   The desired chapter.
      *
      * @return          Datum that matches the chapter.
