@@ -75,4 +75,19 @@ class Application_Model_HomePageMapper
         return $entries;
     }
 
+    // get the password by email
+    public function getNameById($id)
+    {
+        $table = $this->getDbTable();
+
+        $select = $table->select();
+        $select->from($table, array('name'))
+            ->where('id = ?', $id);
+
+        $rows = $table->fetchAll($select);
+        $row = $rows->current();
+
+        return $row->name ? $row->name : null;
+    }
+
 }
