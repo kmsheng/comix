@@ -323,7 +323,7 @@ class CrawlerController extends My_Controller_Action
 
             // if thumb exists, use it. Otherwise, download remote large picture instead.
             $obj->src = file_exists($path) ? '/static/img/chapter-thumbs/' . $filename : $pages[$index];
-            $obj->href = '/index/browse?url=' . $chapterLink->url;
+            $obj->href = '/index/browse?url=' . $chapterLink->url . '&text=' . $chapterLink->value;
             $obj->value = $chapterLink->value;
             $obj->flag = ($index >= $limit) ? true : false;
 
