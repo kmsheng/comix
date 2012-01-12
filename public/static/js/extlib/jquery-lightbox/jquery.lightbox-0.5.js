@@ -220,7 +220,21 @@
 		 */
 		function _resize_container_image_box(intImageWidth, intImageHeight) {
 
+			var overlayWidth = $('#jquery-overlay').width() - (settings.containerBorderSize * 2);
+			var overlayHeight = $('#jquery-overlay').height();
+			var newHeight = 0;
 
+			if ((intImageHeight <= overlayHeight) && (intImageWidth <= overlayWidth)) {
+				newHeight = overlayHeight;
+				intImageWidth = parseInt(((intImageWidth * newHeight) / intImageHeight), 10);
+				intImageHeight = newHeight;
+			}
+
+			if ((intImageWidth >= overlayWidth) && (intImageHeight >= overlayHeight)) {
+				newHeight = parseInt(((intImageHeight * overlayWidth) / intImageWidth), 10);
+				intImageWidth = overlayWidth;
+				intImageHeight = newHeight;
+			}
 
 			$('#lightbox-image').css({width: intImageWidth, height: intImageHeight});
 			$('#lightbox-container-image').css('width', intImageWidth);
