@@ -167,4 +167,18 @@ abstract class My_Controller_Action extends Zend_Controller_Action
         echo "Message: " . $e->getMessage() . "\n";
     }
 
+    /* @param url   URL to get chapter.
+     *
+     * @return      Chapter if it matches the regular expression.
+     */
+    public function getChapterByUrl($url)
+    {
+        preg_match('/ch=(\d+)$/', $url, $matches);
+
+        if (isset($matches[1])) {
+            return $matches[1];
+        }
+        return null;
+    }
+
 }
