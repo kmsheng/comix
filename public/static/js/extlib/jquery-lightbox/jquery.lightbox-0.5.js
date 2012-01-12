@@ -218,16 +218,9 @@
 		 * @param integer intImageWidth The image´s width that will be showed
 		 * @param integer intImageHeight The image´s height that will be showed
 		 */
-		function _resize_container_image_box(intImageWidth,intImageHeight) {
+		function _resize_container_image_box(intImageWidth, intImageHeight) {
 
-			var overlayWidth = $('#jquery-overlay').width() - (settings.containerBorderSize * 2);
-			var newHeight = 0;
 
-			if (intImageWidth >= overlayWidth) {
-				newHeight = parseInt(((intImageHeight * overlayWidth) / intImageWidth), 10);
-				intImageWidth = overlayWidth;
-				intImageHeight = newHeight;
-			}
 
 			$('#lightbox-image').css({width: intImageWidth, height: intImageHeight});
 			$('#lightbox-container-image').css('width', intImageWidth);
