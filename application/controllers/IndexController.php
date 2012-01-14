@@ -13,7 +13,7 @@ class IndexController extends My_Controller_Action
         $this->title = 'comix - 輕鬆讀';
     }
 
-    // main page which has many comics shown.
+    // main page which has many comics shown
     public function indexAction()
     {
         $this->view->headScript()

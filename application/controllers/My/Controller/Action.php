@@ -8,9 +8,10 @@ abstract class My_Controller_Action extends Zend_Controller_Action
     {
     }
 
-    /* @param url   The URL contains the required HTML for dom query.
-     *
-     * @return      A Zend Dom Query instance.
+    /**
+     * get dom query instance
+     * @param string $url the url contains the required html for dom query
+     * @return Zend_Dom_Query a zend dom query instance
      */
     public function getDomQuery($url)
     {
@@ -18,9 +19,10 @@ abstract class My_Controller_Action extends Zend_Controller_Action
         return new Zend_Dom_Query($html);
     }
 
-    /* @param url   URL to fetch the link of each chapter.
-     *
-     * @return      An array contains chapter links.
+    /**
+     * get links contains chapter information
+     * @param string $url url to fetch the link of each chapter
+     * @return array chapter links
      */
     public function getChapterLinks($url)
     {
@@ -29,7 +31,7 @@ abstract class My_Controller_Action extends Zend_Controller_Action
 
         preg_match('/\d+\.html/', $url, $number);
 
-        // Here's the base url to the intro page of comic.
+        // here's the base url to the intro page of comic
         $baseUrl = 'http://www.8comic.com/love/drawing-' . $number[0] . '?ch=';
         $chapterLinks = array();
 
@@ -37,10 +39,10 @@ abstract class My_Controller_Action extends Zend_Controller_Action
 
             $onclick = $link->getAttribute('onclick');
 
-            // Regular expression for cview('7820-7.html',11);
+            // regular expression for cview('7820-7.html',11);
             preg_match('/^cview\(\'\d+-(\d+)\.html\'\,\d+\)/', $onclick, $chapter);
 
-            // If it fetches the chpater number
+            // if it fetches the chpater number
             if (!empty($chapter)) {
                 $obj = new stdClass;
                 $obj->value = trim($link->nodeValue);
@@ -52,9 +54,10 @@ abstract class My_Controller_Action extends Zend_Controller_Action
         return $chapterLinks;
     }
 
-    /* @param url   URL to the comic page of certain chapter and has JavaScript contains var codes="".
-     *
-     * @return      An array contains the url to the first page of each chapter.
+    /**
+     * fetch the first page of each chapter
+     * @param string $url url to the comic page of certain chapter and has javascript contains var codes=""
+     * @return array contains the image urls
      */
     public function fetchFirstPages($url)
     {
@@ -71,16 +74,21 @@ abstract class My_Controller_Action extends Zend_Controller_Action
         return $firstPages;
     }
 
+    /**
+     * get item id
+     * @param string $url the url to retrieve item id
+     * @return int item id
+     */
     public function getItemId($url)
     {
         preg_match('/(\d+).html/', $url, $urlMatches);
-        return $urlMatches[1];
+        return (int) $urlMatches[1];
     }
 
-    /* @param url   URL of any page that display the comic.
-     *
-     * @return      An array contains several objects that have
-     *              num, sid, did, page, code as the member variables of object.
+    /**
+     * get page data by the javascript they provide
+     * @param string $url url of any page that display the comic
+     * @return array contains several objects that have num, sid, did, page, code as the member variables of object
      */
     public function getPageData($url)
     {
@@ -116,9 +124,10 @@ abstract class My_Controller_Action extends Zend_Controller_Action
         return $data;
     }
 
-    /* @param datum     An object contains num, sid, did, page, code as member variables.
-     *
-     * @return          The absolute URL of comic image.
+    /**
+     * decrypt the image of url
+     * @param object $datum contains num, sid, did, page, code as member variables
+     * @return string the absolute url of comic image
      */
     public function getImageUrl($datum, $itemid, $p = 1)
     {
@@ -145,9 +154,9 @@ abstract class My_Controller_Action extends Zend_Controller_Action
         return 'http://img' . $sid . '.8comic.com/' . $did . '/' . $itemid . '/' . $num . '/' . $img . '.jpg';
     }
 
-    /* @param url   URL to be verified.
-     *
-     * @return      True if it's comic intro page.
+    /*
+     * @param string $url url to be verified
+     * @return bool true if it's comic intro page
      */
     public function isComicIntroPage($url)
     {
@@ -159,7 +168,7 @@ abstract class My_Controller_Action extends Zend_Controller_Action
 
     }
 
-    /* @param e Zend Exception Instance.
+    /* @param Zend_Exception $e Zend Exception Instance.
      */
     public function showErrorMessage($e)
     {
@@ -167,9 +176,10 @@ abstract class My_Controller_Action extends Zend_Controller_Action
         echo "Message: " . $e->getMessage() . "\n";
     }
 
-    /* @param url   URL to get chapter.
-     *
-     * @return      Chapter if it matches the regular expression.
+    /**
+     * get the number of chapter by url
+     * @param $url url to get chapter
+     * @return int|null chapter if it matches the regular expression.
      */
     public function getChapterByUrl($url)
     {

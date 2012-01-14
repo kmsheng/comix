@@ -10,7 +10,7 @@ class CrawlerController extends My_Controller_Action
     {
         parent::init();
 
-        // Set the time limit to be 30 minutes because parsing website can be time consuming.
+        // set the time limit to be 30 minutes because parsing website can be time consuming
         set_time_limit(1800);
 
         $this->homePage = new Application_Model_HomePage();
@@ -19,12 +19,10 @@ class CrawlerController extends My_Controller_Action
         $this->_helper->layout->disableLayout();
     }
 
-    /* Retrieve an absolute URL.
-     *
-     * @param url   Incomplete url that does not include domain name.
-     *              e.g. /msg, member/reg.aspx
-     *
-     * @return      The full URL, e.g. http://www.8comic.com/member/reg.aspx
+    /**
+     * retrieve an absolute url
+     * @param string $url incomplete url that does not include domain name. e.g. /msg, member/reg.aspx
+     * @return string the full url, e.g. http://www.8comic.com/member/reg.aspx
      */
     public function getFullUrl($url)
     {
@@ -39,12 +37,11 @@ class CrawlerController extends My_Controller_Action
         return $url;
     }
 
-    /* Retrieve an array contains link objects, each of them has href and value as member variables.
-     *
-     * @param url   URL to parse links.
-     * @param data  An array that contains the link data, could be empty.
-     *
-     * @return      An array that contains link data.
+    /**
+     * retrieve an array contains link objects, each of them has href and value as member variables
+     * @param string $url url to parse links
+     * @param array $data an array that contains the link data, could be empty
+     * @return array an array that contains link data
      */
     public function getLinks($url, $data)
     {
@@ -74,11 +71,10 @@ class CrawlerController extends My_Controller_Action
         return $data;
     }
 
-    /* To determine whether a URL has chapter links.
-     *
-     * @param url   URL that has the chpater links.
-     *
-     * @return      True if the URL matches the regular expression.
+    /**
+     * to determine whether a url has chapter links
+     * @param string $url url that has the chpater links
+     * @return bool true if the url matches the regular expression
      */
     public function hasChapterLinks($url) {
         $rule = '';
@@ -98,11 +94,10 @@ class CrawlerController extends My_Controller_Action
         return false;
     }
 
-    /* To check whether a URL has already been run.
-     *
-     * @param url   URL to be verified.
-     *
-     * @return      True if the url has already been run.
+    /**
+     * to check whether a url has already been run
+     * @param string $url url to be verified
+     * @return bool return true if the url has already been run
      */
     public function hasUrl($url)
     {
@@ -116,12 +111,11 @@ class CrawlerController extends My_Controller_Action
         return false;
     }
 
-    /* To retrieve image data such as image source, hypertext reference, text value, and description of images.
-     *
-     * @param link  An object contains member variables href and value.
-     * @param data  An array contains the image data; it could be empty for the first call.
-     *
-     * @return data An image data array.
+    /**
+     * to retrieve image data such as image source, hypertext reference, text value, and description of images
+     * @param object $link an object contains member variables href and value
+     * @param array $data an array contains the image data; it could be empty for the first call
+     * @return array an image data array
      */
     public function getImages($link, $data)
     {
@@ -152,12 +146,11 @@ class CrawlerController extends My_Controller_Action
         return $data;
     }
 
-    /* Fetch description of a comic from provided URL.
-     *
-     * @param url       URL to fetch the description of an comic.
-     * @param length    Desired length of description. Default to be 100.
-     *
-     * @return          The description of an comic.
+    /**
+     * fetch description of a comic from provided url
+     * @param string $url url to fetch the description of an comic
+     * @param int $length desired length of description. default to be 100
+     * @return string the description of an comic
      */
     public function getDescription($url, $length = 100)
     {
@@ -167,7 +160,7 @@ class CrawlerController extends My_Controller_Action
 
         foreach ($descriptions as $description) {
 
-            // Here's where they put the description, it might be changed.
+            // here's where they put the description, it might be changed
             if ('f0f8ff' === $description->getAttribute('bgcolor')) {
 
                 $text = $description->nodeValue;
@@ -179,25 +172,24 @@ class CrawlerController extends My_Controller_Action
         }
     }
 
-    /* To resize an image and save it to specific folder.
-     *
-     * @param filePath  Either local path or remote url is fine.
-     * @param newWidth  The new width which the thumb is gonna be.
-     *
+    /**
+     * to resize an image and save it to specific folder
+     * @param string $filepath either local path or remote url is fine
+     * @param int $newwidth the new width which the thumb is gonna be
      * */
     public function resizeImage($filePath, $newWidth)
     {
 
-        // Get new sizes
+        // get new sizes
         list($width, $height) = getimagesize($filePath);
 
         $newHeight = ($height * $newWidth) / $width;
 
-        // Load
+        // load
         $thumb = imagecreatetruecolor($newWidth, $newHeight);
         $source = imagecreatefromjpeg($filePath);
 
-        // Resize
+        // resize
         imagecopyresized($thumb, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
 
         preg_match('/\/([\w\_]+\.jpg)/', $filePath, $matches);
@@ -205,16 +197,15 @@ class CrawlerController extends My_Controller_Action
         $filename = $matches[1];
         $path = dirname(__FILE__) . '/../../public/static/img/chapter-thumbs/' . $filename;
 
-        // Save resized image
+        // save resized image
         imagejpeg($thumb, $path, 100);
 
     }
 
-    /* Update the data of home page such as links, names of comics, descriptions.
-     *
-     * @param data  An object contains value, img src, description
-     *
-     * @return      True if successfully finish update.
+    /**
+     * update the data of home page such as links, names of comics, descriptions
+     * @param object $data data contains value, img src, description
+     * @return bool true if successfully finish update
      */
     public function updateHomePage($data)
     {
@@ -242,7 +233,7 @@ class CrawlerController extends My_Controller_Action
     {
     }
 
-    /* Making the chapter thumbs based on the data of home page by running this action.
+    /* making the chapter thumbs based on the data of home page by running this action
      */
     public function makeChapterThumbsAction()
     {
@@ -277,7 +268,7 @@ class CrawlerController extends My_Controller_Action
         $this->view->output = 'done fetching chapter thumbs';
     }
 
-    /* Provide the home page data in json format.
+    /* provide the home page data in json format
      */
     public function provideHomePageDataAction()
     {
@@ -299,7 +290,7 @@ class CrawlerController extends My_Controller_Action
         header('Content-type: application/json');
     }
 
-    /* Display the json data of a chapter by running this action.
+    /* display the json data of a chapter by running this action
      */
     public function provideChapterDataAction()
     {
@@ -356,8 +347,7 @@ class CrawlerController extends My_Controller_Action
         header('Content-type: application/json');
     }
 
-    /* Parse the links and image urls of home page
-     * and store them in the database.
+    /* parse the links and image urls of home page and store them in the database
      */
     public function updateHomePageAction()
     {
@@ -376,7 +366,7 @@ class CrawlerController extends My_Controller_Action
         }
     }
 
-    /* Provides comic pages data.
+    /* provides comic pages data
      */
     public function provideComicAction()
     {
@@ -411,12 +401,11 @@ class CrawlerController extends My_Controller_Action
 
     }
 
-    /* Find next and previous element by the current element.
-     *
-     * @param object $current The current object contains num, sid, did, page, and code.
-     * @param object $data The data object which contains other objects such as the current object.
-     *
-     * @return object $prevAndNext Object contains member variables like next and prev. It could be null.
+    /**
+     * find next and previous element by the current element
+     * @param object $current The current object contains num, sid, did, page, and code
+     * @param object $data The data object which contains other objects such as the current object
+     * @return object $prevAndNext Object contains member variables like next and prev. it could be null
      */
     public function findNextAndPrev($current, $data)
     {
@@ -437,12 +426,11 @@ class CrawlerController extends My_Controller_Action
         return $prevAndNext;
     }
 
-    /* To find a datum of chapter by the provided chapter.
-     *
-     * @param data Object contains member variables such as num, sid, did, page, code.
-     * @param chapter The desired chapter.
-     *
-     * @return Datum that matches the chapter.
+    /**
+     * to find a datum of chapter by the provided chapter
+     * @param $data Object contains member variables such as num, sid, did, page, code
+     * @param $chapter The desired chapter
+     * @return object|null Datum that matches the chapter
      */
     public function findChapterData($data, $chapter)
     {
