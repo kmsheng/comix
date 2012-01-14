@@ -409,6 +409,20 @@ header, footer, aside, nav, article {
 .name a:hover {
     color: #000;
 }
+
+#chapter {
+    margin-top: 40px;
+}
+.button {
+    margin: 10px 20px;
+}
+.chapter-title {
+    margin: 10px 20px;
+    font-size: 30px;
+    letter-spacing: 3px;
+}
+
+
 /* non-semantic helper classes */
 
 /* For image replacement */
