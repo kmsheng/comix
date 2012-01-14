@@ -6,6 +6,7 @@ $(function() {
 		url: url,
 		success: function(data) {
 			makePages(data);
+			addButtons(data.extra);
 			$('#gallery a').lightBox();
 		}
 	});
