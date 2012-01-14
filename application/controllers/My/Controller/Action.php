@@ -186,7 +186,7 @@ abstract class My_Controller_Action extends Zend_Controller_Action
         preg_match('/ch=(\d+)$/', $url, $matches);
 
         if (isset($matches[1])) {
-            return $matches[1];
+            return (int) $matches[1];
         }
         return null;
     }
