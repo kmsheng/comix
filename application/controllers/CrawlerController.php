@@ -400,7 +400,11 @@ class CrawlerController extends My_Controller_Action
             $images[$index] = $this->getImageUrl($chapterData, $itemid, $index);
         }
 
-        $output = Zend_Json::encode($images);
+        $comic = new stdClass;
+        $comic->images = $images;
+        $comic->extra = $nextAndPrev;
+
+        $output = Zend_Json::encode($comic);
         $this->view->output = $output;
 
         header('Content-type: application/json');
