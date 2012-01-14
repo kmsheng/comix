@@ -393,6 +393,7 @@ class CrawlerController extends My_Controller_Action
 
         $chapter = $this->getChapterByUrl($url);
         $chapterData = $this->findChapterData($data, $chapter);
+        $nextAndPrev = $this->findNextAndPrev($chapterData, $data);
 
         for ($index = 1; $index <= $chapterData->page; $index++) {
 
@@ -406,6 +407,31 @@ class CrawlerController extends My_Controller_Action
 
     }
 
+    /* Find next and previous element by the current element.
+     *
+     * @param object $current The current object contains num, sid, did, page, and code.
+     * @param object $data The data object which contains other objects such as the current object.
+     *
+     * @return object $prevAndNext Object contains member variables like next and prev. It could be null.
+     */
+    public function findNextAndPrev($current, $data)
+    {
+        $array = (array) $data;
+
+        $first  = current($array);
+        $last = $array[sizeof($array) - 1];
+
+        $currentKey = array_search($current, $array);
+
+        $prevValue = ($current != $first) ? $array[$currentKey - 1] : null;
+        $nextValue = ($current != $last) ? $array[$currentKey + 1] : null;
+
+        $prevAndNext = new stdClass;
+        $prevAndNext->next = $nextValue;
+        $prevAndNext->prev = $prevValue;
+
+        return $prevAndNext;
+    }
     /* To find a datum of chapter by the provided chapter.
      *
      * @param data      Object contains member variables such as num, sid, did, page, code.
