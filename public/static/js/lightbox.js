@@ -5,7 +5,7 @@ $(function() {
 	$.ajax({
 		url: url,
 		success: function(data) {
-			makePages(data);
+			makePages(data.images);
 			addButtons(data.extra);
 			$('#gallery a').lightBox();
 		}
