@@ -11,10 +11,8 @@
     <meta name="description" content="comix">
     <meta name="author" content="kmsheng">
 
-    <link rel="stylesheet" href="/static/css/style.css">
+    <?php echo $this->headStyle() ?>
     <?php echo $this->headLink() ?>
-
-    <script src="/static/js/extlib/modernizr/modernizr-2.0.6.min.js"></script>
 </head>
 
 <body>
@@ -24,8 +22,6 @@
     <script>window.jQuery || document.write('<script src="/static/js/extlib/jquery/jquery-1.6.2.min.js"><\/script>')</script>
 
     <!-- scripts concatenated and minified via ant build script-->
-    <script defer src="/static/js/plugins.js"></script>
-    <script defer src="/static/js/script.js"></script>
     <?php echo $this->headScript() ?>
     <!-- end scripts-->
 
