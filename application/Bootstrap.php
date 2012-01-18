@@ -12,6 +12,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     protected function _initConfig()
     {
+        $config = $this->getOptions();
+
+        // amazon s3 url
+        Zend_Registry::set('amazon_s3_comix', $config['amazon']['s3']['comix']);
     }
 }
 
