@@ -1,6 +1,6 @@
 $(function() {
 	var comicUrl = document.location.search;
-	var url = 'http://comix.kmsheng.com/crawler/provide-comic' + comicUrl;
+	var url = '/crawler/provide-comic' + comicUrl;
 
 	$.ajax({
 		url: url,

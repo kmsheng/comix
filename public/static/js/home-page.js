@@ -1,4 +1,4 @@
-var url = 'http://comix.kmsheng.com/crawler/provide-home-page-data';
+var url = '/crawler/provide-home-page-data';
 
 var generatePins = function(data) {
 	var pinBox = $('<div>').addClass('pin-box');
