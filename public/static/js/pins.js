@@ -3,6 +3,7 @@ $(function() {
 	$.ajax({
 		url: url,
         success: function(data) {
+
             generatePins(data);
             setPins();
         }
