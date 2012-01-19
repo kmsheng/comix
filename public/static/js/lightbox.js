@@ -29,7 +29,7 @@ var makePages = function(data) {
 
 var addButtons = function(extra) {
     var chapter = $('#chapter');
-    var home = $('<a>').addClass('button').attr('href', 'http://comix.kmsheng.com').text('回首頁');
+    var home = $('<a>').addClass('button').attr('href', '/').text('回首頁');
     var matches = document.location.search.match(/(\?url=http:\/\/www\.8comic\.com\/love\/drawing-(\d+)\.html\?ch=)(\d+)/);
     var backUrl = '/index/chapter?url=http://www.8comic.com/html/' + matches[2] + '.html';
     var back = $('<a>').addClass('button').attr('href', backUrl).text('回上一頁');
