@@ -59,11 +59,16 @@ class Application_Model_HomePageMapper
         return $home_page;
     }
 
-    public function fetchAll()
+    public function fetchByLimit($start, $count)
     {
-        $resultSet = $this->getDbTable()->fetchAll();
-        $entries   = array();
+
+        $table = $this->getDbTable();
+        $select =  $table->select()->limit($start, $count);
+
+        $resultSet = $table->fetchAll($select);
+
         foreach ($resultSet as $row) {
+
             $entry = new Application_Model_HomePage();
             $entry->setId($row->id)
                 ->setName($row->name)
@@ -72,7 +77,9 @@ class Application_Model_HomePageMapper
 
             $entries[] = $entry;
         }
+
         return $entries;
+
     }
 
     // get the password by email
