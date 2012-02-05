@@ -273,9 +273,15 @@ class CrawlerController extends My_Controller_Action
     public function provideHomePageDataAction()
     {
 
+        if (!isset($_GET['start'])) {
+            throw new Zend_Exception('Please input the numeric value of start');
+        }
+
+        $start = $_GET['start'];
+
         $output = array();
 
-        foreach ($this->homePageMapper->fetchAll() as $datum) {
+        foreach ($this->homePageMapper->fetchByLimit($start, 70) as $datum) {
             $array = array();
             $array['href'] = '/index/chapter?url=' . $this->domain .'/html/' . $datum->getId() . '.html';
             $array['name'] = $datum->getName();
